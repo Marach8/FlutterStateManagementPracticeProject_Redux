@@ -1,14 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart' hide Reducer;
+import 'package:flutter_hooks/flutter_hooks.dart' as hooks;
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 
 
-class FlutterReduxExample extends HookWidget {
+class FlutterReduxExample extends hooks.HookWidget {
   const FlutterReduxExample({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    final storage = Store(
+      mainAppReducer, initialState: const StorageState(items: [], filters: ItemFilters.getAllTexts)
+    );
+    return Scaffold(
+      appBar: AppBar(title: const Text('Flutter Redux Demo'), centerTitle: true), 
+      body: StoreProvider(
+        store: storage,
+        child: Column(
+          children: [
+            Row(
+              children: [
+                CustomButton(onPressed: (){}, text: 'GetAllTexts'),
+                CustomButton(onPressed: (){}, text: 'GetLongTexts'),
+                CustomButton(onPressed: (){}, text: 'GetShortTexts')
+              ]
+            )
+          ]
+        ),
+      )
+    );
+  }
+}
+
+
+class CustomButton extends StatelessWidget {
+  final void Function()? onPressed; final String text;
+  const CustomButton({required this.onPressed, required this.text, super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: onPressed,
+      child: Text(text),
+    );
   }
 }
 
