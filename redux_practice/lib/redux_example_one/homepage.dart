@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart' as hooks;
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
-import 'package:redux_practice/custombutton.dart';
-import 'package:redux_practice/enums_and_extensions.dart';
-import 'package:redux_practice/reducer_functions.dart';
-import 'package:redux_practice/redux_state_class.dart';
+import 'package:redux_practice/redux_example_one/custombutton.dart';
+import 'package:redux_practice/redux_example_one/enums_and_extensions.dart';
+import 'package:redux_practice/redux_example_one/reducer_functions.dart';
+import 'package:redux_practice/redux_example_one/redux_state_class.dart';
 
 
 class FlutterReduxExample extends hooks.HookWidget {

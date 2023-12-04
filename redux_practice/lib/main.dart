@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:redux_practice/homepage.dart';
+import 'package:redux_practice/redux_example_one/homepage.dart';
+import 'package:redux_practice/redux_example_two/homepage.dart';
 
 void main() => runApp(const MyApp());
 
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
         appBarTheme: const AppBarTheme(backgroundColor: Colors.blue),
         useMaterial3: true
       ),
-      home: const FlutterReduxExample()
+      home: const ReduxWithOneMalwareExample ()
     );
   }
 }

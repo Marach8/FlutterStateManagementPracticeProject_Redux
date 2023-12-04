@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:redux_practice/enums_and_extensions.dart';
+import 'package:redux_practice/redux_example_one/enums_and_extensions.dart';
 
 @immutable
 class StorageState{

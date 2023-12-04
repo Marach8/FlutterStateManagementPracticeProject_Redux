@@ -1,6 +1,6 @@
 import 'package:redux/redux.dart';
-import 'package:redux_practice/enums_and_extensions.dart';
-import 'package:redux_practice/redux_state_class.dart';
+import 'package:redux_practice/redux_example_one/enums_and_extensions.dart';
+import 'package:redux_practice/redux_example_one/redux_state_class.dart';
 
 
 
