@@ -1,17 +1,15 @@
 import 'dart:convert'; import 'dart:io';
-import 'dart:developer' as marach show log;
+//import 'dart:developer' as marach show log;
 import 'package:redux/redux.dart';
 import 'package:redux_practice/redux_example_two/customobject_class.dart';
 import 'package:redux_practice/redux_example_two/homepage.dart';
-import 'package:http/http.dart' as http;
+//import 'package:http/http.dart' as http;
 
 void applicationMiddleWare(Store<ApplicationState> store, action, NextDispatcher nextDispatch){
-  switch (action){
-    case LoadUserData: {
-      getPersonData()
-      .then((persons) => store.dispatch(SuccessfullUserDataFetch(personData: persons)))
+  if(action is LoadUserData){
+    getPersonData()
+      .then((persons) {store.dispatch(SuccessfullUserDataFetch(personData: persons));})
       .catchError((e) => store.dispatch(FailedUserDataFetch(error: e)));
-    }
   }
   nextDispatch(action);
 }
@@ -19,11 +17,13 @@ void applicationMiddleWare(Store<ApplicationState> store, action, NextDispatcher
 
 
 ApplicationState reducer(ApplicationState oldState, action){
-  switch (action){
-    case LoadUserData: return const ApplicationState(isLoading: true, error: null, fetchedData: null);
-    case SuccessfullUserDataFetch: return ApplicationState(isLoading: false, error: null, fetchedData: action.personData);
-    case FailedUserDataFetch: return ApplicationState(isLoading: false, error: action.error, fetchedData: null);
-  }
+  if(action is LoadUserData){
+    return const ApplicationState(error: null, isLoading: true, fetchedData: null);
+  } else if(action is SuccessfullUserDataFetch){
+    return ApplicationState(error: null, isLoading: false, fetchedData: action.personData);
+  } else if(action is FailedUserDataFetch){
+    return ApplicationState(error: action.error, isLoading: false, fetchedData: null);
+  } 
   return oldState;
 }
 

@@ -36,6 +36,6 @@ class FailedUserDataFetch extends Actions{
 class ApplicationState{
   final bool isLoading; final Iterable<PersonData>? fetchedData; final Object? error;
   const ApplicationState({required this.isLoading, required this.fetchedData, required this.error});
-
+  
   const ApplicationState.initialState():isLoading = false, fetchedData = null, error = null;
 }

@@ -21,12 +21,7 @@ class ReduxWithOneMalwareExample extends StatelessWidget {
         child: Column(
           children: [
             TextButton(
-              onPressed: () async{
-                //fetchData();
-                print(await getPersonData());
-                //marach.log('This is the future: ${future.toString()}');
-                //storage.dispatch(const LoadUserData());
-                },
+              onPressed: () => storage.dispatch(const LoadUserData()),
               child: const Text('Load Persons')
             ), 
             StoreConnector<ApplicationState, bool>(
@@ -39,7 +34,7 @@ class ReduxWithOneMalwareExample extends StatelessWidget {
             StoreConnector<ApplicationState, Iterable<PersonData>?>(
               converter: (storage) => storage.state.fetchedData,
               builder: (context, persons){
-                if(persons == null){return const Text('persons is null');}
+                if(persons == null){return const SizedBox.shrink();}
                 else{
                   return Expanded(
                     child: ListView.builder(
@@ -66,7 +61,7 @@ class ReduxWithOneMalwareExample extends StatelessWidget {
 
 
 
-const apiUrl = 'http://192.168.162.178:5500/redux_practice/api/people.json';
+const apiUrl = 'http://192.168.136.178:5500/redux_practice/api/people.json';
 
 
-//const apiUrl = 'http://127.0.0.1:5500/redux_practice/api/people.json';
+// const apiUrl = 'http://127.0.0.1:5500/redux_practice/api/people.json';
