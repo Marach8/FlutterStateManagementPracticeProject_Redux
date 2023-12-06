@@ -31,7 +31,7 @@ class ReduxWithTwoMalwaresExample extends StatelessWidget {
               }
             ),
             StoreConnector<ApplicationState, Iterable<PersonData>?>(
-              converter: (storage) => storage.state.fetchedData,
+              converter: (storage) => storage.state.sortedfetchedData,
               builder: (context, persons){
                 if(persons == null){return const SizedBox.shrink();}
                 else{
