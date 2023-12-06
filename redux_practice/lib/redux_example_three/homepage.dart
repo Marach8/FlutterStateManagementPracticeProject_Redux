@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
-import 'package:redux_practice/redux_example_two/customobject_class.dart';
-import 'package:redux_practice/redux_example_two/functions.dart';
+import 'package:redux_practice/redux_example_three/customclass.dart';
+import 'package:redux_practice/redux_example_three/functions.dart';
 
-class ReduxWithOneMalwareExample extends StatelessWidget {
-  const ReduxWithOneMalwareExample ({super.key});
+class ReduxWithTwoMalwaresExample extends StatelessWidget {
+  const ReduxWithTwoMalwaresExample ({super.key});
 
   @override
   Widget build(BuildContext context) {
     final storage = Store<ApplicationState>(
       reducer, initialState: const ApplicationState.initialState(),
-      middleware: [applicationMiddleWare]
+      middleware: [loadPersonsDataMiddleWare, loadPersonImageMiddleWare]
     );
     return Scaffold(
       appBar: AppBar(title: const Text('Redux Example2'), centerTitle: true),
@@ -40,8 +40,20 @@ class ReduxWithOneMalwareExample extends StatelessWidget {
                       itemCount: persons.length,
                       itemBuilder: (context, listIndex) {
                         final person = persons.elementAt(listIndex);
+                        Widget subtitle = Text('${person.age} years old');
                         return ListTile(
-                          title: Text(person.name), subtitle: Text('${person.age} years old')
+                          title: Text(person.name), 
+                          subtitle: person.imageData == null? subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              subtitle,
+                              Image.memory(person.imageData!)
+                            ]
+                          ),
+                          trailing: person.isLoading? const CircularProgressIndicator(): TextButton(
+                            onPressed: () => storage.dispatch(LoadImageDataAction(id: person.id)),
+                            child: const Text('Load Image')
+                          )
                         );
                       }
                     ),
@@ -55,9 +67,6 @@ class ReduxWithOneMalwareExample extends StatelessWidget {
     );
   }
 }
-
-
-
 
 
 const apiUrl = 'http://192.168.0.167:5500/redux_practice/api/people.json';
